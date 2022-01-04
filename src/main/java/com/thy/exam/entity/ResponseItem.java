@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * Author: thy
- * Date: 2022/1/4 14:05
  */
 public class ResponseItem<T> implements Serializable {
     private static final long serialVersionUID = 8636784335318533156L;
