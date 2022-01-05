@@ -4,7 +4,6 @@ import org.apache.ibatis.jdbc.SQL;
 
 /**
  * Author: thy
- * Date: 2022/1/4 14:00
  */
 public class AdminSql {
     private static final String USER_TABLE = "user";

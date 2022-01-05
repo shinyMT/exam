@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * Author: thy
- * Date: 2022/1/4 16:26
  */
 public class QAItem implements Serializable {
     private static final long serialVersionUID = -6156449883811985487L;

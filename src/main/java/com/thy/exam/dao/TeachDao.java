@@ -9,7 +9,6 @@ import java.util.List;
 
 /**
  * Author: thy
- * Date: 2022/1/4 14:33
  */
 @Mapper
 public interface TeachDao {

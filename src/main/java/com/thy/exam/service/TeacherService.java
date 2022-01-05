@@ -6,7 +6,6 @@ import com.thy.exam.entity.SubjectItem;
 
 /**
  * Author: thy
- * Date: 2022/1/4 14:35
  */
 public interface TeacherService {
     /**
