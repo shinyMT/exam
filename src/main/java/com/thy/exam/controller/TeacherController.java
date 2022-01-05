@@ -1,6 +1,7 @@
 package com.thy.exam.controller;
 
 import com.thy.exam.entity.ResponseItem;
+import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.SubjectItem;
 import com.thy.exam.service.TeacherService;
 import lombok.NoArgsConstructor;
@@ -58,7 +59,31 @@ public class TeacherController {
      * 随机生成试卷
      * */
     @GetMapping("/generate")
-    public ResponseItem<SubjectItem> generatePaper(){
-        return teacherService.generatePaper();
+    public ResponseItem<SubjectItem> generatePaper(String code){
+        return teacherService.generatePaper(code);
+    }
+
+    /**
+     * 获取学生试卷
+     * */
+    @PostMapping("/get/stu/paper")
+    public ResponseItem<StudentItem> getStudentPaper(String code, String tag){
+        return teacherService.getStudentPaper(code, tag);
+    }
+
+    /**
+     * 给学生试卷打分
+     * */
+    @PostMapping("/set/mark")
+    public ResponseItem<StudentItem> setMarkToStudent(String code, String tag, String mark){
+        return teacherService.setMarkToStudent(code, tag, mark);
+    }
+
+    /**
+     * 查询所有学生的成绩
+     * */
+    @PostMapping("/all/mark")
+    public ResponseItem<StudentItem> getMarkForStudents(String tag){
+        return teacherService.getMarkForStudents(tag);
     }
 }

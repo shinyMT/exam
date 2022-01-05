@@ -2,8 +2,10 @@ package com.thy.exam.service.impl;
 
 import com.thy.exam.dao.TeachDao;
 import com.thy.exam.entity.ResponseItem;
+import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.SubjectItem;
 import com.thy.exam.service.TeacherService;
+import com.thy.exam.util.TagUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,6 @@ import java.util.List;
 
 /**
  * Author: thy
- * Date: 2022/1/4 14:37
  */
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -45,9 +46,11 @@ public class TeacherServiceImpl implements TeacherService {
     public ResponseItem<SubjectItem> getAllSubjects() {
         ResponseItem<SubjectItem> item = new ResponseItem<>();
         List<SubjectItem> subjects = teachDao.getAllSubjects();
+        int count = teachDao.getSubjectCount();
         if(subjects != null){
             item.setCode(0);
             item.setMsg("查询成功");
+            item.setCount(count);
             item.setData(subjects);
         }else {
             item.setCode(-1);
@@ -90,7 +93,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public ResponseItem<SubjectItem> generatePaper() {
+    public ResponseItem<SubjectItem> generatePaper(String code) {
         ResponseItem<SubjectItem> item = new ResponseItem<>();
         // 获取所有选择题
         List<SubjectItem> choiceSubjects = teachDao.choiceSubject();
@@ -126,12 +129,75 @@ public class TeacherServiceImpl implements TeacherService {
                     list.add(essaySubjects.get(i));
                 }
             }
-            item.setCode(0);
-            item.setMsg("组卷成功");
-            item.setData(list);
+            // 组卷完成后生成该试卷的唯一标识符
+            TagUtil tagUtil = new TagUtil();
+            String tag = tagUtil.generateTag(code);
+            // 获取组卷得到的题目
+            String cqOne = list.get(0).getTitle() + ":" + list.get(0).getChoice();
+            String cqTwo = list.get(1).getTitle() + ":" + list.get(1).getChoice();
+            String cqThree = list.get(2).getTitle() + ":" + list.get(2).getChoice();
+            String eqOne = list.get(3).getTitle();
+            String eqTwo = list.get(4).getTitle();
+            // 将组卷的结果写入数据库中存储
+            Integer res = teachDao.saveDonePaper(tag, cqOne, cqTwo, cqThree, eqOne, eqTwo);
+            if(res > 0){
+                // 存储成功
+                item.setCode(0);
+                item.setMsg("组卷成功，" + tag);
+                item.setData(list);
+            }
         }else{
             item.setCode(-1);
             item.setMsg("组卷失败，试题不存在");
+        }
+
+        return item;
+    }
+
+    @Override
+    public ResponseItem<StudentItem> getStudentPaper(String code, String tag) {
+        ResponseItem<StudentItem> item = new ResponseItem<>();
+        StudentItem studentPaper = teachDao.getStudentPaper(code, tag);
+        if(studentPaper != null){
+            List<StudentItem> list = new ArrayList<>();
+            list.add(studentPaper);
+            item.setCode(0);
+            item.setMsg("查询成功");
+            item.setData(list);
+        }else{
+            item.setCode(-1);
+            item.setMsg("查询失败");
+        }
+
+        return item;
+    }
+
+    @Override
+    public ResponseItem<StudentItem> setMarkToStudent(String code, String tag, String mark) {
+        ResponseItem<StudentItem> item = new ResponseItem<>();
+        Integer result = teachDao.setMarkToStudent(code, tag, mark);
+        if(result > 0){
+            item.setCode(0);
+            item.setMsg("打分成功");
+        }else{
+            item.setCode(-1);
+            item.setMsg("打分失败");
+        }
+
+        return item;
+    }
+
+    @Override
+    public ResponseItem<StudentItem> getMarkForStudents(String tag) {
+        ResponseItem<StudentItem> item = new ResponseItem<>();
+        List<StudentItem> markList = teachDao.getMarkForStudents(tag);
+        if(markList != null){
+            item.setCode(0);
+            item.setMsg("查询成功");
+            item.setData(markList);
+        }else {
+            item.setCode(-1);
+            item.setMsg("查询失败");
         }
 
         return item;

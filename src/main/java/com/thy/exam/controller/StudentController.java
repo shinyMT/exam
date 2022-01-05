@@ -2,12 +2,13 @@ package com.thy.exam.controller;
 
 import com.thy.exam.entity.ResponseItem;
 import com.thy.exam.entity.StudentItem;
-import com.thy.exam.entity.StudentQAItem;
+import com.thy.exam.entity.QAItem;
 import com.thy.exam.service.StudentService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,20 +25,28 @@ public class StudentController {
     }
 
     /**
-     * 提交试卷----待测试
+     * 获取试卷
      * */
-    @PatchMapping("/commit")
-    public ResponseItem<StudentQAItem> commitAnswer(String code, String cqOne, String caOne,
-                                                    String cqTwo, String caTwo, String cqThree, String caThree,
-                                                    String eqOne, String eaOne, String eqTwo, String eaTwo){
-        return studentService.commitAnswer(code, cqOne, caOne, cqTwo, caTwo, cqThree, caThree, eqOne, eaOne, eqTwo, eaTwo);
+    @PostMapping("/get/paper")
+    public ResponseItem<QAItem> getPaperByTag(String tag){
+        return studentService.getPaperByTag(tag);
     }
 
     /**
-     * 查询成绩 -- 待测试
+     * 提交试卷
      * */
-    @GetMapping("/search/score")
-    public ResponseItem<StudentItem> searchScore(String code){
-        return studentService.searchScore(code);
+    @PostMapping("/commit")
+    public ResponseItem<StudentItem> commitAnswer(String code, String cqOne, String caOne,
+                                             String cqTwo, String caTwo, String cqThree, String caThree,
+                                             String eqOne, String eaOne, String eqTwo, String eaTwo, String qaTag){
+        return studentService.commitAnswer(code, cqOne, caOne, cqTwo, caTwo, cqThree, caThree, eqOne, eaOne, eqTwo, eaTwo, qaTag);
+    }
+
+    /**
+     * 查询成绩
+     * */
+    @PostMapping("/search/mark")
+    public ResponseItem<StudentItem> searchScore(String code, String tag){
+        return studentService.searchScore(code, tag);
     }
 }

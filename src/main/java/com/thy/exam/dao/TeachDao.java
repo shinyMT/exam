@@ -1,5 +1,6 @@
 package com.thy.exam.dao;
 
+import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.SubjectItem;
 import com.thy.exam.sql.TeacherSql;
 import org.apache.ibatis.annotations.*;
@@ -65,4 +66,29 @@ public interface TeachDao {
      * */
     @DeleteProvider(type = TeacherSql.class, method = "deleteSubjectById")
     Integer deleteSubjectById(int id);
+
+    /**
+     * 存储组卷完成的试卷信息
+     * */
+    @InsertProvider(type = TeacherSql.class, method = "saveDonePaper")
+    Integer saveDonePaper(String tag, String cqOne, String cqTwo, String cqThree,
+                          String eqOne, String eqTwo);
+
+    /**
+     * 查看学生试卷
+     * */
+    @SelectProvider(type = TeacherSql.class, method = "getStudentPaper")
+    StudentItem getStudentPaper(String code, String tag);
+
+    /**
+     * 给学生试卷打分
+     * */
+    @UpdateProvider(type = TeacherSql.class, method = "setMarkToStudent")
+    Integer setMarkToStudent(String code, String tag, String mark);
+
+    /**
+     * 查看所有学生分数
+     * */
+    @SelectProvider(type = TeacherSql.class, method = "getMarkForStudents")
+    List<StudentItem> getMarkForStudents(String tag);
 }

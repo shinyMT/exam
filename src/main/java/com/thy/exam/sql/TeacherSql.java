@@ -9,6 +9,8 @@ import org.apache.ibatis.jdbc.SQL;
 public class TeacherSql {
     // 定义常量存放表名
     private static final String SUBJECT_TABLE = "subject";
+    private static final String QA_TABLE = "qa";
+    private static final String STUDENT_TABLE = "student";
 
     /**
      * 添加试题
@@ -93,5 +95,57 @@ public class TeacherSql {
         sql.WHERE("id=" + id);
 
         return sql.toString();
+    }
+
+    /**
+     * 存储组卷好的试题
+     * @param cqOne 选择题1的题目
+     * @param cqTwo 选择题2的题目
+     * @param cqThree 选择题3的题目
+     * @param eqOne 问答题1的题目
+     * @param eqTwo 问答题2的题目
+     * @param tag 试卷标识符
+     * */
+    public String saveDonePaper(String tag, String cqOne, String cqTwo, String cqThree,
+                               String eqOne, String eqTwo){
+        SQL sql = new SQL();
+        sql.INSERT_INTO(QA_TABLE);
+        sql.VALUES("tag, cqOne, cqTwo, cqThree, eqOne, eqTwo", "'" + tag + "', '" + cqOne + "', '"
+        + cqTwo + "', '" + cqThree + "', '" + eqOne + "', '" + eqTwo + "'");
+
+//        System.out.println(sql);
+        return sql.toString();
+    }
+
+    /**
+     * 查看学生试卷
+     * @param code 学生账号
+     * @param tag 试卷标识符
+     * */
+    public String getStudentPaper(String code, String tag){
+        return "select * from " + STUDENT_TABLE + " where code='" + code + "' and qaTag='" + tag + "'";
+    }
+
+    /**
+     * 给学生试卷打分
+     * @param code 学生账号
+     * @param tag 试卷标识符
+     * @param mark 试卷成绩
+     * */
+    public String setMarkToStudent(String code, String tag, String mark){
+        SQL sql = new SQL();
+        sql.UPDATE(STUDENT_TABLE);
+        sql.SET("mark='" + mark + "'");
+        sql.WHERE("code='" + code + "' and qaTag='" + tag + "'");
+
+        return sql.toString();
+    }
+
+    /**
+     * 查看所有学生成绩
+     * @param tag 试卷标识符
+     * */
+    public String getMarkForStudents(String tag){
+        return "select code, mark from " + STUDENT_TABLE + " where qaTag='" + tag + "'";
     }
 }
