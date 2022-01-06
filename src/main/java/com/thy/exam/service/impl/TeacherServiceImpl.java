@@ -24,6 +24,9 @@ public class TeacherServiceImpl implements TeacherService {
         this.teachDao = teachDao;
     }
 
+    /**
+     * 添加试题
+     * */
     @Override
     public ResponseItem<SubjectItem> addSubject(String title, String choice, String type) {
         ResponseItem<SubjectItem> item = new ResponseItem<>();
@@ -42,6 +45,9 @@ public class TeacherServiceImpl implements TeacherService {
         return item;
     }
 
+    /**
+     * 查看当前题库中的所有试题
+     * */
     @Override
     public ResponseItem<SubjectItem> getAllSubjects() {
         ResponseItem<SubjectItem> item = new ResponseItem<>();
@@ -60,6 +66,9 @@ public class TeacherServiceImpl implements TeacherService {
         return item;
     }
 
+    /**
+     * 修改试题
+     * */
     @Override
     public ResponseItem<SubjectItem> updateSubjectById(int id, String title, String choice, String type) {
         ResponseItem<SubjectItem> item = new ResponseItem<>();
@@ -76,6 +85,9 @@ public class TeacherServiceImpl implements TeacherService {
         return item;
     }
 
+    /**
+     * 删除试题
+     * */
     @Override
     public ResponseItem<SubjectItem> deleteSubjectById(int id) {
         ResponseItem<SubjectItem> item = new ResponseItem<>();
@@ -92,6 +104,9 @@ public class TeacherServiceImpl implements TeacherService {
         return item;
     }
 
+    /**
+     * 随机生成试卷
+     * */
     @Override
     public ResponseItem<SubjectItem> generatePaper(String code) {
         ResponseItem<SubjectItem> item = new ResponseItem<>();
@@ -154,6 +169,9 @@ public class TeacherServiceImpl implements TeacherService {
         return item;
     }
 
+    /**
+     * 查看学生试卷
+     * */
     @Override
     public ResponseItem<StudentItem> getStudentPaper(String code, String tag) {
         ResponseItem<StudentItem> item = new ResponseItem<>();
@@ -172,6 +190,9 @@ public class TeacherServiceImpl implements TeacherService {
         return item;
     }
 
+    /**
+     * 给学生试卷打分
+     * */
     @Override
     public ResponseItem<StudentItem> setMarkToStudent(String code, String tag, String mark) {
         ResponseItem<StudentItem> item = new ResponseItem<>();
@@ -187,6 +208,9 @@ public class TeacherServiceImpl implements TeacherService {
         return item;
     }
 
+    /**
+     * 查看所有学生试卷
+     * */
     @Override
     public ResponseItem<StudentItem> getMarkForStudents(String tag) {
         ResponseItem<StudentItem> item = new ResponseItem<>();

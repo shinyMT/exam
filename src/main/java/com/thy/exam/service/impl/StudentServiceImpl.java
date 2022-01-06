@@ -22,6 +22,9 @@ public class StudentServiceImpl implements StudentService {
         this.studentDao = studentDao;
     }
 
+    /**
+     * 获取试卷
+     * */
     @Override
     public ResponseItem<QAItem> getPaperByTag(String tag) {
         ResponseItem<QAItem> item = new ResponseItem<>();
@@ -40,6 +43,9 @@ public class StudentServiceImpl implements StudentService {
         return item;
     }
 
+    /**
+     * 提交试卷
+     * */
     @Override
     public ResponseItem<StudentItem> commitAnswer(String code, String cqOne, String caOne, String cqTwo,
                                              String caTwo, String cqThree, String caThree, String eqOne,
@@ -67,6 +73,9 @@ public class StudentServiceImpl implements StudentService {
         return item;
     }
 
+    /**
+     * 查询成绩
+     * */
     @Override
     public ResponseItem<StudentItem> searchScore(String code, String tag) {
         ResponseItem<StudentItem> item = new ResponseItem<>();

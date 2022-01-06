@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * Author: thy
- * Date: 2022/1/4 14:07
  */
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -20,6 +19,9 @@ public class AdminServiceImpl implements AdminService {
         this.adminDao = adminDao;
     }
 
+    /**
+     * 修改账户信息
+     * */
     @Override
     public ResponseItem<UserItem> changeInfo(String code, String newPwd) {
         ResponseItem<UserItem> item = new ResponseItem<>();
@@ -38,6 +40,9 @@ public class AdminServiceImpl implements AdminService {
         return item;
     }
 
+    /**
+     * 设置考试起止时间
+     * */
     @Override
     public ResponseItem<TimeItem> setExamTime(String startTime, String endTime) {
         ResponseItem<TimeItem> item = new ResponseItem<>();
