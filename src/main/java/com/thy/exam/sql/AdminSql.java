@@ -10,6 +10,18 @@ public class AdminSql {
     private static final String TIME_TABLE = "time";
 
     /**
+     * 验证用户登陆信息
+     * */
+    public String checkIdentity(String code){
+        SQL sql = new SQL();
+        sql.SELECT("*");
+        sql.FROM(USER_TABLE);
+        sql.WHERE("code='" + code + "'");
+
+        return sql.toString();
+    }
+
+    /**
      * 修改用户信息
      * @param code 账号
      * @param newPwd 新密码

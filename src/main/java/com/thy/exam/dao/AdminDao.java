@@ -1,7 +1,9 @@
 package com.thy.exam.dao;
 
+import com.thy.exam.entity.UserItem;
 import com.thy.exam.sql.AdminSql;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 
 /**
@@ -10,6 +12,12 @@ import org.apache.ibatis.annotations.UpdateProvider;
  */
 @Mapper
 public interface AdminDao {
+    /**
+     * 登陆
+     * */
+    @SelectProvider(type = AdminSql.class, method = "checkIdentity")
+    UserItem checkIdentity(String code);
+
     /**
      * 修改用户信息
      * */

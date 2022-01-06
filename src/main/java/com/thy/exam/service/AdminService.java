@@ -9,6 +9,11 @@ import com.thy.exam.entity.UserItem;
  */
 public interface AdminService {
     /**
+     * 验证登陆信息
+     * */
+    ResponseItem<UserItem> checkIdentity(String code, String password);
+
+    /**
      * 修改信息
      * @param code 学生账号
      * @param newPwd 新密码

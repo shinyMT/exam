@@ -23,6 +23,14 @@ public class AdminController {
     }
 
     /**
+     * 验证用户身份信息
+     * */
+    @PostMapping("/login")
+    public ResponseItem<UserItem> checkIdentity(String code, String password){
+        return adminService.checkIdentity(code, password);
+    }
+
+    /**
      * 修改用户信息
      * */
     @GetMapping("/change")
