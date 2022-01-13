@@ -1,5 +1,5 @@
 server:
-  port: 11011
+  port: 11012
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/exam

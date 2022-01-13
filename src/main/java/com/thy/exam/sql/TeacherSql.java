@@ -107,12 +107,11 @@ public class TeacherSql {
      * @param tag 试卷标识符
      * */
     public String saveDonePaper(String tag, String cqOne, String cqTwo, String cqThree,
-                               String eqOne, String eqTwo){
+                               String eqOne, String eqTwo, String name){
         SQL sql = new SQL();
         sql.INSERT_INTO(QA_TABLE);
-        sql.VALUES("tag, cqOne, cqTwo, cqThree, eqOne, eqTwo", "'" + tag + "', '" + cqOne + "', '"
-        + cqTwo + "', '" + cqThree + "', '" + eqOne + "', '" + eqTwo + "'");
-
+        sql.VALUES("tag, cqOne, cqTwo, cqThree, eqOne, eqTwo, name", "'" + tag + "', '" + cqOne + "', '"
+        + cqTwo + "', '" + cqThree + "', '" + eqOne + "', '" + eqTwo + "', '" + name + "'");
 //        System.out.println(sql);
         return sql.toString();
     }

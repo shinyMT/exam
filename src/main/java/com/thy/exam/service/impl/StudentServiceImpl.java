@@ -23,11 +23,32 @@ public class StudentServiceImpl implements StudentService {
     }
 
     /**
+     * 获取所有试卷名
+     * */
+    @Override
+    public ResponseItem<QAItem> getAllPaper() {
+        ResponseItem<QAItem> item = new ResponseItem<>();
+        List<QAItem> qaList = studentDao.getAllPaper();
+        if(qaList != null){
+            item.setCode(0);
+            item.setMsg("获取成功");
+            item.setData(qaList);
+        }else{
+            item.setCode(-1);
+            item.setMsg("获取失败");
+        }
+
+        return item;
+    }
+
+    /**
      * 获取试卷
      * */
     @Override
-    public ResponseItem<QAItem> getPaperByTag(String tag) {
+    public ResponseItem<QAItem> getPaperByTag(String name) {
         ResponseItem<QAItem> item = new ResponseItem<>();
+        QAItem qaItem = studentDao.getPaperTagByName(name);
+        String tag = qaItem.getTag();
         QAItem paper = studentDao.getPaperByTag(tag);
         if(paper != null){
             List<QAItem> paperList = new ArrayList<>();

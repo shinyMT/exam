@@ -6,10 +6,15 @@ import com.thy.exam.entity.QAItem;
 
 public interface StudentService {
     /**
-     * 获取试卷
-     * @param tag 试卷标识符
+     * 获取所有试卷
      * */
-    ResponseItem<QAItem> getPaperByTag(String tag);
+    ResponseItem<QAItem> getAllPaper();
+
+    /**
+     * 获取试卷
+     * @param name 试卷名
+     * */
+    ResponseItem<QAItem> getPaperByTag(String name);
 
     /**
      * 提交试卷

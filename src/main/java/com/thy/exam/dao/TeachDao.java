@@ -71,7 +71,7 @@ public interface TeachDao {
      * */
     @InsertProvider(type = TeacherSql.class, method = "saveDonePaper")
     Integer saveDonePaper(String tag, String cqOne, String cqTwo, String cqThree,
-                          String eqOne, String eqTwo);
+                          String eqOne, String eqTwo, String name);
 
     /**
      * 查看学生试卷

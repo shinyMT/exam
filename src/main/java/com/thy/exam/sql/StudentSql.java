@@ -10,6 +10,25 @@ public class StudentSql {
     private static final String QA_TABLE = "qa";
 
     /**
+     * 获取所有试卷
+     * */
+    public String getAllPaper(){
+        return "select tag, name from " + QA_TABLE;
+    }
+
+    /**
+     * 获取试卷标识
+     * */
+    public String getPaperTagByName(String name){
+        SQL sql = new SQL();
+        sql.SELECT("tag");
+        sql.FROM(QA_TABLE);
+        sql.WHERE("name='" + name + "'");
+
+        return sql.toString();
+    }
+
+    /**
      * 根据标识获取试卷
      * @param tag 试卷标识符
      * */

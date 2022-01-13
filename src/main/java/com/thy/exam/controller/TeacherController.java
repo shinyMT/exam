@@ -58,8 +58,8 @@ public class TeacherController {
      * 随机生成试卷
      * */
     @GetMapping("/generate")
-    public ResponseItem<SubjectItem> generatePaper(String code){
-        return teacherService.generatePaper(code);
+    public ResponseItem<SubjectItem> generatePaper(String code, String name){
+        return teacherService.generatePaper(code, name);
     }
 
     /**

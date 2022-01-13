@@ -22,6 +22,8 @@ public class QAItem implements Serializable {
     private String eqTwo;
     // 试卷标识符
     private String tag;
+    // 试卷名
+    private String name;
 
     public String getCode() {
         return code;
@@ -77,5 +79,13 @@ public class QAItem implements Serializable {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

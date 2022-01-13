@@ -108,7 +108,7 @@ public class TeacherServiceImpl implements TeacherService {
      * 随机生成试卷
      * */
     @Override
-    public ResponseItem<SubjectItem> generatePaper(String code) {
+    public ResponseItem<SubjectItem> generatePaper(String code, String name) {
         ResponseItem<SubjectItem> item = new ResponseItem<>();
         // 获取所有选择题
         List<SubjectItem> choiceSubjects = teachDao.choiceSubject();
@@ -154,7 +154,7 @@ public class TeacherServiceImpl implements TeacherService {
             String eqOne = list.get(3).getTitle();
             String eqTwo = list.get(4).getTitle();
             // 将组卷的结果写入数据库中存储
-            Integer res = teachDao.saveDonePaper(tag, cqOne, cqTwo, cqThree, eqOne, eqTwo);
+            Integer res = teachDao.saveDonePaper(tag, cqOne, cqTwo, cqThree, eqOne, eqTwo, name);
             if(res > 0){
                 // 存储成功
                 item.setCode(0);

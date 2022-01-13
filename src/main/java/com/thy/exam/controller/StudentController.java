@@ -6,6 +6,7 @@ import com.thy.exam.entity.QAItem;
 import com.thy.exam.service.StudentService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,14 @@ public class StudentController {
     @Autowired
     public void setStudentService(StudentService studentService){
         this.studentService = studentService;
+    }
+
+    /**
+     * 获取所有试卷名
+     * */
+    @GetMapping("/all/paper")
+    public ResponseItem<QAItem> getAllPaper(){
+        return studentService.getAllPaper();
     }
 
     /**

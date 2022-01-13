@@ -7,8 +7,23 @@ import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectProvider;
 
+import java.util.List;
+
 @Mapper
 public interface StudentDao {
+
+    /**
+     * 获取所有试卷
+     * */
+    @SelectProvider(type = StudentSql.class, method = "getAllPaper")
+    List<QAItem> getAllPaper();
+
+    /**
+     * 通过试卷名获取试卷标识
+     * */
+    @SelectProvider(type = StudentSql.class, method = "getPaperTagByName")
+    QAItem getPaperTagByName(String name);
+
     /**
      * 获取试卷
      * */
