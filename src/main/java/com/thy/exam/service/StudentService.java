@@ -14,7 +14,7 @@ public interface StudentService {
      * 获取试卷
      * @param name 试卷名
      * */
-    ResponseItem<QAItem> getPaperByTag(String name);
+    ResponseItem<QAItem> getPaperByName(String name);
 
     /**
      * 提交试卷

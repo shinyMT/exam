@@ -45,20 +45,25 @@ public class StudentServiceImpl implements StudentService {
      * 获取试卷
      * */
     @Override
-    public ResponseItem<QAItem> getPaperByTag(String name) {
+    public ResponseItem<QAItem> getPaperByName(String name) {
         ResponseItem<QAItem> item = new ResponseItem<>();
         QAItem qaItem = studentDao.getPaperTagByName(name);
-        String tag = qaItem.getTag();
-        QAItem paper = studentDao.getPaperByTag(tag);
-        if(paper != null){
-            List<QAItem> paperList = new ArrayList<>();
-            paperList.add(paper);
-            item.setCode(0);
-            item.setMsg("获取成功");
-            item.setData(paperList);
+        if(qaItem == null){
+            item.setCode(-2);
+            item.setMsg("获取试卷标识失败");
         }else{
-            item.setCode(-1);
-            item.setMsg("获取失败");
+            String tag = qaItem.getTag();
+            QAItem paper = studentDao.getPaperByTag(tag);
+            if(paper != null){
+                List<QAItem> paperList = new ArrayList<>();
+                paperList.add(paper);
+                item.setCode(0);
+                item.setMsg("获取成功");
+                item.setData(paperList);
+            }else{
+                item.setCode(-1);
+                item.setMsg("获取失败");
+            }
         }
 
         return item;

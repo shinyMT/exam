@@ -35,8 +35,8 @@ public class StudentController {
      * 获取试卷
      * */
     @PostMapping("/get/paper")
-    public ResponseItem<QAItem> getPaperByTag(String tag){
-        return studentService.getPaperByTag(tag);
+    public ResponseItem<QAItem> getPaperByName(String name){
+        return studentService.getPaperByName(name);
     }
 
     /**
