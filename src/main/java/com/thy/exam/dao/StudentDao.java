@@ -2,6 +2,7 @@ package com.thy.exam.dao;
 
 import com.thy.exam.entity.QAItem;
 import com.thy.exam.entity.StudentItem;
+import com.thy.exam.entity.TimeItem;
 import com.thy.exam.sql.StudentSql;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
@@ -49,4 +50,10 @@ public interface StudentDao {
      * */
     @SelectProvider(type = StudentSql.class, method = "searchScore")
     StudentItem searchScore(String code, String tag);
+
+    /**
+     * 获取考试时间
+     * */
+    @SelectProvider(type = StudentSql.class, method = "getExamTime")
+    TimeItem getExamTime();
 }

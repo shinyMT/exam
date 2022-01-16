@@ -3,6 +3,7 @@ package com.thy.exam.service;
 import com.thy.exam.entity.ResponseItem;
 import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.QAItem;
+import com.thy.exam.entity.TimeItem;
 
 public interface StudentService {
     /**
@@ -41,4 +42,9 @@ public interface StudentService {
      * @param tag 试卷标识符
      * */
     ResponseItem<StudentItem> searchScore(String code, String tag);
+
+    /**
+     * 查询考试时间
+     * */
+    ResponseItem<TimeItem> getExamTime();
 }

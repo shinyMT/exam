@@ -1,5 +1,6 @@
 package com.thy.exam.service;
 
+import com.thy.exam.entity.QAItem;
 import com.thy.exam.entity.ResponseItem;
 import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.SubjectItem;
@@ -52,10 +53,10 @@ public interface TeacherService {
     /**
      * 给学生试卷打分
      * @param code 学生账号
-     * @param tag 试卷标识符
+     * @param name 试卷名
      * @param mark 分数
      * */
-    ResponseItem<StudentItem> setMarkToStudent(String code, String tag, String mark);
+    ResponseItem<StudentItem> setMarkToStudent(String code, String name, String mark);
 
     /**
      * 查看所有学生成绩

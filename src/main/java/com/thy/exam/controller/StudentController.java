@@ -3,6 +3,7 @@ package com.thy.exam.controller;
 import com.thy.exam.entity.ResponseItem;
 import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.QAItem;
+import com.thy.exam.entity.TimeItem;
 import com.thy.exam.service.StudentService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,13 @@ public class StudentController {
     @PostMapping("/search/mark")
     public ResponseItem<StudentItem> searchScore(String code, String tag){
         return studentService.searchScore(code, tag);
+    }
+
+    /**
+     * 查询考试时间
+     * */
+    @GetMapping("/get/time")
+    public ResponseItem<TimeItem> getExamTime(){
+        return studentService.getExamTime();
     }
 }

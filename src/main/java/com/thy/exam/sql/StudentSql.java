@@ -8,6 +8,7 @@ import org.apache.ibatis.jdbc.SQL;
 public class StudentSql {
     private static final String STUDENT_TABLE = "student";
     private static final String QA_TABLE = "qa";
+    private static final String TIME_TABLE = "time";
 
     /**
      * 获取所有试卷
@@ -82,5 +83,12 @@ public class StudentSql {
      * */
     public String searchScore(String code, String tag){
         return "select mark from " + STUDENT_TABLE + " where code='" + code + "' and qaTag='" + tag + "'";
+    }
+
+    /**
+     * 获取考试时间
+     * */
+    public String getExamTime(){
+        return "select * from " + TIME_TABLE;
     }
 }

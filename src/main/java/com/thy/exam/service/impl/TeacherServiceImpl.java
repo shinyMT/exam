@@ -1,6 +1,8 @@
 package com.thy.exam.service.impl;
 
+import com.thy.exam.dao.StudentDao;
 import com.thy.exam.dao.TeachDao;
+import com.thy.exam.entity.QAItem;
 import com.thy.exam.entity.ResponseItem;
 import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.SubjectItem;
@@ -19,9 +21,11 @@ import java.util.List;
 @Service
 public class TeacherServiceImpl implements TeacherService {
     private TeachDao teachDao;
+    private StudentDao studentDao;
     @Autowired
-    public void setTeachDao(TeachDao teachDao){
+    public void setTeachDao(TeachDao teachDao, StudentDao studentDao){
         this.teachDao = teachDao;
+        this.studentDao = studentDao;
     }
 
     /**
@@ -173,18 +177,26 @@ public class TeacherServiceImpl implements TeacherService {
      * 查看学生试卷
      * */
     @Override
-    public ResponseItem<StudentItem> getStudentPaper(String code, String tag) {
+    public ResponseItem<StudentItem> getStudentPaper(String code, String name) {
         ResponseItem<StudentItem> item = new ResponseItem<>();
-        StudentItem studentPaper = teachDao.getStudentPaper(code, tag);
-        if(studentPaper != null){
-            List<StudentItem> list = new ArrayList<>();
-            list.add(studentPaper);
-            item.setCode(0);
-            item.setMsg("查询成功");
-            item.setData(list);
-        }else{
-            item.setCode(-1);
-            item.setMsg("查询失败");
+        QAItem qa = studentDao.getPaperTagByName(name);
+        if(qa != null){
+            String tag = qa.getTag();
+//            System.out.println(tag);
+            StudentItem studentPaper = teachDao.getStudentPaper(code, tag);
+            if(studentPaper != null){
+                List<StudentItem> list = new ArrayList<>();
+                list.add(studentPaper);
+                item.setCode(0);
+                item.setMsg("查询成功");
+                item.setData(list);
+            }else{
+                item.setCode(-1);
+                item.setMsg("查询失败");
+            }
+        }else {
+            item.setCode(-2);
+            item.setMsg("试卷不存在");
         }
 
         return item;
@@ -194,15 +206,22 @@ public class TeacherServiceImpl implements TeacherService {
      * 给学生试卷打分
      * */
     @Override
-    public ResponseItem<StudentItem> setMarkToStudent(String code, String tag, String mark) {
+    public ResponseItem<StudentItem> setMarkToStudent(String code, String name, String mark) {
         ResponseItem<StudentItem> item = new ResponseItem<>();
-        Integer result = teachDao.setMarkToStudent(code, tag, mark);
-        if(result > 0){
-            item.setCode(0);
-            item.setMsg("打分成功");
+        QAItem qa = studentDao.getPaperTagByName(name);
+        if(qa != null){
+            String tag = qa.getTag();
+            Integer result = teachDao.setMarkToStudent(code, tag, mark);
+            if(result > 0){
+                item.setCode(0);
+                item.setMsg("打分成功");
+            }else{
+                item.setCode(-1);
+                item.setMsg("打分失败");
+            }
         }else{
-            item.setCode(-1);
-            item.setMsg("打分失败");
+            item.setCode(-2);
+            item.setMsg("查询试卷失败");
         }
 
         return item;

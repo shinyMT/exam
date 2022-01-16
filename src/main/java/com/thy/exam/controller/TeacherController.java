@@ -66,16 +66,16 @@ public class TeacherController {
      * 获取学生试卷
      * */
     @PostMapping("/get/stu/paper")
-    public ResponseItem<StudentItem> getStudentPaper(String code, String tag){
-        return teacherService.getStudentPaper(code, tag);
+    public ResponseItem<StudentItem> getStudentPaper(String code, String name){
+        return teacherService.getStudentPaper(code, name);
     }
 
     /**
      * 给学生试卷打分
      * */
     @PostMapping("/set/mark")
-    public ResponseItem<StudentItem> setMarkToStudent(String code, String tag, String mark){
-        return teacherService.setMarkToStudent(code, tag, mark);
+    public ResponseItem<StudentItem> setMarkToStudent(String code, String name, String mark){
+        return teacherService.setMarkToStudent(code, name, mark);
     }
 
     /**

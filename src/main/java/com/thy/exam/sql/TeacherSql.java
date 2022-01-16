@@ -134,8 +134,7 @@ public class TeacherSql {
     public String setMarkToStudent(String code, String tag, String mark){
         SQL sql = new SQL();
         sql.UPDATE(STUDENT_TABLE);
-        sql.SET("mark='" + mark + "'");
-        sql.WHERE("code='" + code + "' and qaTag='" + tag + "'");
+        sql.SET("mark='" + mark + "' where code='" + code + "' and qaTag='" + tag + "'");
 
         return sql.toString();
     }

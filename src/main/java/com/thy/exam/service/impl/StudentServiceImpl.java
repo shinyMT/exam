@@ -4,6 +4,7 @@ import com.thy.exam.dao.StudentDao;
 import com.thy.exam.entity.ResponseItem;
 import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.QAItem;
+import com.thy.exam.entity.TimeItem;
 import com.thy.exam.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -116,6 +117,25 @@ public class StudentServiceImpl implements StudentService {
         }else{
             item.setCode(-1);
             item.setMsg("查询失败");
+        }
+
+        return item;
+    }
+
+    @Override
+    public ResponseItem<TimeItem> getExamTime() {
+        ResponseItem<TimeItem> item = new ResponseItem<>();
+        TimeItem examTime = studentDao.getExamTime();
+        if(examTime != null){
+            List<TimeItem> list = new ArrayList<>();
+            list.add(examTime);
+
+            item.setCode(0);
+            item.setMsg("获取成功");
+            item.setData(list);
+        }else {
+            item.setCode(-1);
+            item.setMsg("获取失败");
         }
 
         return item;
