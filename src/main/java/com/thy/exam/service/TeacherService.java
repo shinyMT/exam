@@ -63,4 +63,12 @@ public interface TeacherService {
      * @param tag 试卷标识符
      * */
     ResponseItem<StudentItem> getMarkForStudents(String tag);
+
+    /**
+     * 修改学生成绩
+     * @param code 学生账号
+     * @param mark 新成绩
+     * @param name 试卷名
+     * */
+    ResponseItem<StudentItem> updateStudentMark(String code, String mark, String name);
 }

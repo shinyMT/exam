@@ -157,17 +157,27 @@ public class TeacherServiceImpl implements TeacherService {
             String cqThree = list.get(2).getTitle() + ":" + list.get(2).getChoice();
             String eqOne = list.get(3).getTitle();
             String eqTwo = list.get(4).getTitle();
-            // 将组卷的结果写入数据库中存储
-            Integer res = teachDao.saveDonePaper(tag, cqOne, cqTwo, cqThree, eqOne, eqTwo, name);
-            if(res > 0){
-                // 存储成功
-                item.setCode(0);
-                item.setMsg("组卷成功，" + tag);
-                item.setData(list);
+            // 存储前判断是否存在同名试卷
+            QAItem qaItem = teachDao.checkPaperStatus(name);
+            if(qaItem != null){
+                item.setCode(-2);
+                item.setMsg("已存在同名试卷");
+            }else{
+                // 如果查询结果为空则将组卷的结果写入数据库中存储
+                Integer res = teachDao.saveDonePaper(tag, cqOne, cqTwo, cqThree, eqOne, eqTwo, name);
+                if(res > 0){
+                    // 存储成功
+                    item.setCode(0);
+                    item.setMsg("组卷成功，" + tag);
+                    item.setData(list);
+                }else{
+                    item.setCode(-3);
+                    item.setMsg("存储试卷失败");
+                }
             }
         }else{
             item.setCode(-1);
-            item.setMsg("组卷失败，试题不存在");
+            item.setMsg("组卷失败，试题不足");
         }
 
         return item;
@@ -241,6 +251,30 @@ public class TeacherServiceImpl implements TeacherService {
         }else {
             item.setCode(-1);
             item.setMsg("查询失败");
+        }
+
+        return item;
+    }
+
+    @Override
+    public ResponseItem<StudentItem> updateStudentMark(String code, String mark, String name) {
+        ResponseItem<StudentItem> item = new ResponseItem<>();
+        // 获取试卷标识
+        QAItem qa = studentDao.getPaperTagByName(name);
+        if(qa != null){
+            String tag = qa.getTag();
+            // 修改成绩
+            Integer result = teachDao.updateStudentMark(code, mark, tag);
+            if(result > 0){
+                item.setCode(0);
+                item.setMsg("修改成功");
+            }else{
+                item.setCode(-1);
+                item.setMsg("修改失败");
+            }
+        }else{
+            item.setCode(-2);
+            item.setMsg("查询不到对应试卷");
         }
 
         return item;

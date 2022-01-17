@@ -1,5 +1,6 @@
 package com.thy.exam.dao;
 
+import com.thy.exam.entity.QAItem;
 import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.SubjectItem;
 import com.thy.exam.sql.TeacherSql;
@@ -67,6 +68,12 @@ public interface TeachDao {
     Integer deleteSubjectById(int id);
 
     /**
+     * 判断当前试卷库是否存在同名试卷
+     * */
+    @SelectProvider(type = TeacherSql.class, method = "checkPaperStatus")
+    QAItem checkPaperStatus(String name);
+
+    /**
      * 存储组卷完成的试卷信息
      * */
     @InsertProvider(type = TeacherSql.class, method = "saveDonePaper")
@@ -90,4 +97,10 @@ public interface TeachDao {
      * */
     @SelectProvider(type = TeacherSql.class, method = "getMarkForStudents")
     List<StudentItem> getMarkForStudents(String tag);
+
+    /**
+     * 修改学生成绩
+     * */
+    @UpdateProvider(type = TeacherSql.class, method = "updateStudentMark")
+    Integer updateStudentMark(String code, String mark, String tag);
 }

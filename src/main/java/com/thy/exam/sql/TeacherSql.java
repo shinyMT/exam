@@ -1,5 +1,6 @@
 package com.thy.exam.sql;
 
+import com.thy.exam.entity.QAItem;
 import org.apache.ibatis.jdbc.SQL;
 
 /**
@@ -98,6 +99,14 @@ public class TeacherSql {
     }
 
     /**
+     * 判断当前试卷库中是否存在同名试卷
+     * @param name 试卷名
+     * */
+    public String checkPaperStatus(String name){
+        return "select * from " + QA_TABLE + " where name='" + name + "'";
+    }
+
+    /**
      * 存储组卷好的试题
      * @param cqOne 选择题1的题目
      * @param cqTwo 选择题2的题目
@@ -145,5 +154,19 @@ public class TeacherSql {
      * */
     public String getMarkForStudents(String tag){
         return "select code, mark from " + STUDENT_TABLE + " where qaTag='" + tag + "'";
+    }
+
+    /**
+     * 修改学生试卷成绩
+     * @param code 学生账号
+     * @param mark 新成绩
+     * @param tag 试卷标识符
+     * */
+    public String updateStudentMark(String code, String mark, String tag){
+        SQL sql = new SQL();
+        sql.UPDATE(STUDENT_TABLE);
+        sql.SET("mark='" + mark + "' where code='" + code + "' and qaTag='" + tag + "'");
+
+        return sql.toString();
     }
 }
