@@ -82,15 +82,15 @@ public class TeacherController {
      * 查询所有学生的成绩
      * */
     @PostMapping("/all/mark")
-    public ResponseItem<StudentItem> getMarkForStudents(String tag){
-        return teacherService.getMarkForStudents(tag);
+    public ResponseItem<StudentItem> getMarkForStudents(String name){
+        return teacherService.getMarkForStudents(name);
     }
 
     /**
      * 修改学生成绩
      * */
     @PostMapping("/update/mark")
-    public ResponseItem<StudentItem> updateStudentMark(String code, String mark, String name){
-        return teacherService.updateStudentMark(code, mark, name);
+    public ResponseItem<StudentItem> updateStudentMark(String code, String mark, String tag){
+        return teacherService.updateStudentMark(code, mark, tag);
     }
 }

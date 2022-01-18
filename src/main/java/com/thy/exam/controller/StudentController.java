@@ -1,9 +1,6 @@
 package com.thy.exam.controller;
 
-import com.thy.exam.entity.ResponseItem;
-import com.thy.exam.entity.StudentItem;
-import com.thy.exam.entity.QAItem;
-import com.thy.exam.entity.TimeItem;
+import com.thy.exam.entity.*;
 import com.thy.exam.service.StudentService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +51,8 @@ public class StudentController {
      * 查询成绩
      * */
     @PostMapping("/search/mark")
-    public ResponseItem<StudentItem> searchScore(String code, String tag){
-        return studentService.searchScore(code, tag);
+    public ResponseItem<MarkItem> searchScore(String code){
+        return studentService.searchScore(code);
     }
 
     /**

@@ -1,9 +1,6 @@
 package com.thy.exam.service;
 
-import com.thy.exam.entity.ResponseItem;
-import com.thy.exam.entity.StudentItem;
-import com.thy.exam.entity.QAItem;
-import com.thy.exam.entity.TimeItem;
+import com.thy.exam.entity.*;
 
 public interface StudentService {
     /**
@@ -39,9 +36,8 @@ public interface StudentService {
     /**
      * 查询成绩
      * @param code 学生账号
-     * @param tag 试卷标识符
      * */
-    ResponseItem<StudentItem> searchScore(String code, String tag);
+    ResponseItem<MarkItem> searchScore(String code);
 
     /**
      * 查询考试时间

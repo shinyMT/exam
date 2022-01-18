@@ -79,10 +79,16 @@ public class StudentSql {
     /**
      * 查询成绩
      * @param code 学生账号
-     * @param tag 试卷标识符
      * */
-    public String searchScore(String code, String tag){
-        return "select mark from " + STUDENT_TABLE + " where code='" + code + "' and qaTag='" + tag + "'";
+    public String searchScore(String code){
+        SQL sql = new SQL();
+        sql.SELECT("s.mark, q.name");
+        sql.FROM(STUDENT_TABLE + " s");
+        sql.LEFT_OUTER_JOIN(QA_TABLE + " q on s.qaTag=q.tag");
+        sql.WHERE("s.code='" + code + "'");
+
+//        System.out.println(sql);
+        return sql.toString();
     }
 
     /**

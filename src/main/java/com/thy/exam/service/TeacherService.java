@@ -60,15 +60,15 @@ public interface TeacherService {
 
     /**
      * 查看所有学生成绩
-     * @param tag 试卷标识符
+     * @param name 试卷名
      * */
-    ResponseItem<StudentItem> getMarkForStudents(String tag);
+    ResponseItem<StudentItem> getMarkForStudents(String name);
 
     /**
      * 修改学生成绩
      * @param code 学生账号
      * @param mark 新成绩
-     * @param name 试卷名
+     * @param tag 试卷标识符
      * */
-    ResponseItem<StudentItem> updateStudentMark(String code, String mark, String name);
+    ResponseItem<StudentItem> updateStudentMark(String code, String mark, String tag);
 }

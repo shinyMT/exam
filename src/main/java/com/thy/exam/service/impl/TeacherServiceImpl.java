@@ -170,7 +170,7 @@ public class TeacherServiceImpl implements TeacherService {
                     item.setCode(0);
                     item.setMsg("组卷成功，" + tag);
                     item.setData(list);
-                }else{
+                }else {
                     item.setCode(-3);
                     item.setMsg("存储试卷失败");
                 }
@@ -241,40 +241,39 @@ public class TeacherServiceImpl implements TeacherService {
      * 查看所有学生试卷
      * */
     @Override
-    public ResponseItem<StudentItem> getMarkForStudents(String tag) {
+    public ResponseItem<StudentItem> getMarkForStudents(String name) {
         ResponseItem<StudentItem> item = new ResponseItem<>();
-        List<StudentItem> markList = teachDao.getMarkForStudents(tag);
-        if(markList != null){
-            item.setCode(0);
-            item.setMsg("查询成功");
-            item.setData(markList);
+        QAItem qa = studentDao.getPaperTagByName(name);
+        if(qa != null){
+            String tag = qa.getTag();
+            List<StudentItem> markList = teachDao.getMarkForStudents(tag);
+            if(markList != null){
+                item.setCode(0);
+                item.setMsg("查询成功");
+                item.setData(markList);
+            }else {
+                item.setCode(-1);
+                item.setMsg("查询失败");
+            }
         }else {
-            item.setCode(-1);
-            item.setMsg("查询失败");
+            item.setCode(-2);
+            item.setMsg("搜索对应试卷失败");
         }
 
         return item;
     }
 
     @Override
-    public ResponseItem<StudentItem> updateStudentMark(String code, String mark, String name) {
+    public ResponseItem<StudentItem> updateStudentMark(String code, String mark, String tag) {
         ResponseItem<StudentItem> item = new ResponseItem<>();
-        // 获取试卷标识
-        QAItem qa = studentDao.getPaperTagByName(name);
-        if(qa != null){
-            String tag = qa.getTag();
-            // 修改成绩
-            Integer result = teachDao.updateStudentMark(code, mark, tag);
-            if(result > 0){
-                item.setCode(0);
-                item.setMsg("修改成功");
-            }else{
-                item.setCode(-1);
-                item.setMsg("修改失败");
-            }
+        // 修改成绩
+        Integer result = teachDao.updateStudentMark(code, mark, tag);
+        if(result > 0){
+            item.setCode(0);
+            item.setMsg("修改成功");
         }else{
-            item.setCode(-2);
-            item.setMsg("查询不到对应试卷");
+            item.setCode(-1);
+            item.setMsg("修改失败");
         }
 
         return item;

@@ -153,7 +153,7 @@ public class TeacherSql {
      * @param tag 试卷标识符
      * */
     public String getMarkForStudents(String tag){
-        return "select code, mark from " + STUDENT_TABLE + " where qaTag='" + tag + "'";
+        return "select code, mark, qaTag from " + STUDENT_TABLE + " where qaTag='" + tag + "'";
     }
 
     /**

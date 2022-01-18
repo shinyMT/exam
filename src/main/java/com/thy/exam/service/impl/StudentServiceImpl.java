@@ -1,10 +1,7 @@
 package com.thy.exam.service.impl;
 
 import com.thy.exam.dao.StudentDao;
-import com.thy.exam.entity.ResponseItem;
-import com.thy.exam.entity.StudentItem;
-import com.thy.exam.entity.QAItem;
-import com.thy.exam.entity.TimeItem;
+import com.thy.exam.entity.*;
 import com.thy.exam.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -104,16 +101,14 @@ public class StudentServiceImpl implements StudentService {
      * 查询成绩
      * */
     @Override
-    public ResponseItem<StudentItem> searchScore(String code, String tag) {
-        ResponseItem<StudentItem> item = new ResponseItem<>();
-        StudentItem student = studentDao.searchScore(code, tag);
-        if(student != null){
+    public ResponseItem<MarkItem> searchScore(String code) {
+        ResponseItem<MarkItem> item = new ResponseItem<>();
+        List<MarkItem> studentList = studentDao.searchScore(code);
+        if(studentList != null){
             // 查询成功
-            List<StudentItem> list = new ArrayList<>();
-            list.add(student);
             item.setCode(0);
             item.setMsg("查询成功");
-            item.setData(list);
+            item.setData(studentList);
         }else{
             item.setCode(-1);
             item.setMsg("查询失败");

@@ -1,5 +1,6 @@
 package com.thy.exam.dao;
 
+import com.thy.exam.entity.MarkItem;
 import com.thy.exam.entity.QAItem;
 import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.TimeItem;
@@ -49,7 +50,7 @@ public interface StudentDao {
      * 查询成绩
      * */
     @SelectProvider(type = StudentSql.class, method = "searchScore")
-    StudentItem searchScore(String code, String tag);
+    List<MarkItem> searchScore(String code);
 
     /**
      * 获取考试时间
