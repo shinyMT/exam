@@ -39,12 +39,14 @@ public class AdminSql {
      * 设置考试起止时间
      * @param startTime 开始时间
      * @param endTime 截止时间
+     * @param tag 试卷标识符
      * */
-    public String setExamTime(String startTime, String endTime){
+    public String setExamTime(String startTime, String endTime, String tag){
         SQL sql = new SQL();
-        sql.UPDATE(TIME_TABLE);
-        sql.SET("startTime='" + startTime + "', endTime='" + endTime + "'");
+        sql.INSERT_INTO(TIME_TABLE);
+        sql.VALUES("startTime, endTime, tag", "'" + startTime + "', '" + endTime + "', '" + tag + "'");
 
+        System.out.println(sql);
         return sql.toString();
     }
 }

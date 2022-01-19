@@ -39,6 +39,30 @@ public class StudentServiceImpl implements StudentService {
         return item;
     }
 
+    @Override
+    public ResponseItem<StudentItem> checkCommitStatus(String code, String name) {
+        ResponseItem<StudentItem> item = new ResponseItem<>();
+        QAItem qa = studentDao.getPaperTagByName(name);
+        if(qa != null){
+            // 获取试卷标识符
+            String tag = qa.getTag();
+            StudentItem student = studentDao.checkCommitStatus(code, tag);
+            if(student != null){
+                // 已经提交过
+                item.setCode(-1);
+                item.setMsg("已提交过试卷");
+            }else {
+                item.setCode(0);
+                item.setMsg("未提交过试卷");
+            }
+        }else{
+            item.setCode(-2);
+            item.setMsg("试卷不存在");
+        }
+
+        return  item;
+    }
+
     /**
      * 获取试卷
      * */
@@ -118,19 +142,26 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ResponseItem<TimeItem> getExamTime() {
+    public ResponseItem<TimeItem> getExamTime(String name) {
         ResponseItem<TimeItem> item = new ResponseItem<>();
-        TimeItem examTime = studentDao.getExamTime();
-        if(examTime != null){
-            List<TimeItem> list = new ArrayList<>();
-            list.add(examTime);
+        QAItem qa = studentDao.getPaperTagByName(name);
+        if(qa != null){
+            String tag = qa.getTag();
+            TimeItem examTime = studentDao.getExamTime(tag);
+            if(examTime != null){
+                List<TimeItem> list = new ArrayList<>();
+                list.add(examTime);
 
-            item.setCode(0);
-            item.setMsg("获取成功");
-            item.setData(list);
+                item.setCode(0);
+                item.setMsg("获取成功");
+                item.setData(list);
+            }else {
+                item.setCode(-1);
+                item.setMsg("获取失败");
+            }
         }else {
-            item.setCode(-1);
-            item.setMsg("获取失败");
+            item.setCode(-2);
+            item.setMsg("查询试卷失败");
         }
 
         return item;

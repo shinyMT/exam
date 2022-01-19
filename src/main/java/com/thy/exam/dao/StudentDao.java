@@ -56,5 +56,5 @@ public interface StudentDao {
      * 获取考试时间
      * */
     @SelectProvider(type = StudentSql.class, method = "getExamTime")
-    TimeItem getExamTime();
+    TimeItem getExamTime(String tag);
 }

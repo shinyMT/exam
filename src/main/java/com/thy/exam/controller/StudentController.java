@@ -30,6 +30,14 @@ public class StudentController {
     }
 
     /**
+     * 判断用户是否已经提交过试卷
+     * */
+    @PostMapping("/check/commit")
+    public ResponseItem<StudentItem> checkCommitStatus(String code, String name){
+        return studentService.checkCommitStatus(code, name);
+    }
+
+    /**
      * 获取试卷
      * */
     @PostMapping("/get/paper")
@@ -58,8 +66,8 @@ public class StudentController {
     /**
      * 查询考试时间
      * */
-    @GetMapping("/get/time")
-    public ResponseItem<TimeItem> getExamTime(){
-        return studentService.getExamTime();
+    @PostMapping("/get/time")
+    public ResponseItem<TimeItem> getExamTime(String name){
+        return studentService.getExamTime(name);
     }
 }

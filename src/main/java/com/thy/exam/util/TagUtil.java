@@ -4,12 +4,11 @@ import java.util.Calendar;
 
 /**
  * Author: thy
- * Date: 2022/1/5 12:28
  * 生成试卷唯一标识符的工具类
  */
 public class TagUtil {
     /**
-     * 生成唯一标识
+     * 生成试卷唯一标识符
      * @param code 教师账号
      * */
     public String generateTag(String code){

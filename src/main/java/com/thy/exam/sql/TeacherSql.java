@@ -1,6 +1,5 @@
 package com.thy.exam.sql;
 
-import com.thy.exam.entity.QAItem;
 import org.apache.ibatis.jdbc.SQL;
 
 /**

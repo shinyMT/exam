@@ -24,6 +24,7 @@ public interface AdminService {
      * 设置考试起止时间
      * @param startTime 考试开始时间
      * @param endTime 考试结束时间
+     * @param tag 试卷标识符
      * */
-    ResponseItem<TimeItem> setExamTime(String startTime, String endTime);
+    ResponseItem<TimeItem> setExamTime(String startTime, String endTime, String tag);
 }

@@ -15,6 +15,8 @@ public class TimeItem implements Serializable {
     private String startTime;
     // 结束时间
     private String endTime;
+    // 试卷标识符
+    private String tag;
 
     public int getId() {
         return id;
@@ -38,5 +40,13 @@ public class TimeItem implements Serializable {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

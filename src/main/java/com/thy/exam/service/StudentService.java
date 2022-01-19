@@ -9,6 +9,11 @@ public interface StudentService {
     ResponseItem<QAItem> getAllPaper();
 
     /**
+     * 判断用户是否已经提交过试卷
+     * */
+    ResponseItem<StudentItem> checkCommitStatus(String code, String name);
+
+    /**
      * 获取试卷
      * @param name 试卷名
      * */
@@ -41,6 +46,7 @@ public interface StudentService {
 
     /**
      * 查询考试时间
+     * @param name 试卷名
      * */
-    ResponseItem<TimeItem> getExamTime();
+    ResponseItem<TimeItem> getExamTime(String name);
 }

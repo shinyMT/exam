@@ -42,7 +42,7 @@ public class AdminController {
      * 设置考试起止时间
      * */
     @PostMapping("/set/time")
-    public ResponseItem<TimeItem> setExamTime(String startTime, String endTime){
-        return adminService.setExamTime(startTime, endTime);
+    public ResponseItem<TimeItem> setExamTime(String startTime, String endTime, String tag){
+        return adminService.setExamTime(startTime, endTime, tag);
     }
 }

@@ -28,5 +28,5 @@ public interface AdminDao {
      * 设置考试起止时间
      * */
     @UpdateProvider(type = AdminSql.class, method = "setExamTime")
-    Integer setExamTime(String startTime, String endTime);
+    Integer setExamTime(String startTime, String endTime, String tag);
 }

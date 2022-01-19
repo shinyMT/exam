@@ -37,6 +37,7 @@ public class StudentSql {
         return "select * from " + QA_TABLE + " where tag='" + tag + "'";
     }
 
+
     /**
      * 判断用户是否已经提交过试卷
      * @param code 学生账号
@@ -92,9 +93,10 @@ public class StudentSql {
     }
 
     /**
-     * 获取考试时间
+     * 根据试卷标识获取考试时间
+     * @param tag 试卷标识符
      * */
-    public String getExamTime(){
-        return "select * from " + TIME_TABLE;
+    public String getExamTime(String tag){
+        return "select * from " + TIME_TABLE + " where tag='" + tag + "'";
     }
 }
