@@ -2,6 +2,9 @@ package com.thy.exam.service;
 
 import com.thy.exam.entity.*;
 
+/**
+ * Author: thy
+ */
 public interface StudentService {
     /**
      * 获取所有试卷

@@ -1,6 +1,5 @@
 package com.thy.exam.service;
 
-import com.thy.exam.entity.QAItem;
 import com.thy.exam.entity.ResponseItem;
 import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.SubjectItem;

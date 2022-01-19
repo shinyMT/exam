@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.UpdateProvider;
 
 /**
  * Author: thy
- * Date: 2022/1/4 14:04
  */
 @Mapper
 public interface AdminDao {

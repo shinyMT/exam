@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * Author: thy
- * Date: 2022/1/4 13:40
  */
 public class UserItem implements Serializable {
     private static final long serialVersionUID = -2839177392298732418L;

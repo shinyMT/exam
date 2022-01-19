@@ -11,6 +11,9 @@ import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
 
+/**
+ * Author: thy
+ */
 @Mapper
 public interface StudentDao {
 

@@ -4,7 +4,6 @@ import org.apache.ibatis.jdbc.SQL;
 
 /**
  * Author: thy
- * Date: 2022/1/4 13:55
  */
 public class TeacherSql {
     // 定义常量存放表名
