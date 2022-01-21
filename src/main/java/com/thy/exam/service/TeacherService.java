@@ -40,7 +40,7 @@ public interface TeacherService {
      * 随机生成试卷
      * @param code 教师账号
      * */
-    ResponseItem<SubjectItem> generatePaper(String code, String name);
+    ResponseItem<SubjectItem> generatePaper(String code, String name, String startTime, String endTime);
 
     /**
      * 查看学生试卷

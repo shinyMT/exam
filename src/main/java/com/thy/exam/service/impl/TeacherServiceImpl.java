@@ -1,5 +1,6 @@
 package com.thy.exam.service.impl;
 
+import com.thy.exam.dao.AdminDao;
 import com.thy.exam.dao.StudentDao;
 import com.thy.exam.dao.TeachDao;
 import com.thy.exam.entity.QAItem;
@@ -22,10 +23,12 @@ import java.util.List;
 public class TeacherServiceImpl implements TeacherService {
     private TeachDao teachDao;
     private StudentDao studentDao;
+    private AdminDao adminDao;
     @Autowired
-    public void setTeachDao(TeachDao teachDao, StudentDao studentDao){
+    public void setTeachDao(TeachDao teachDao, StudentDao studentDao, AdminDao adminDao){
         this.teachDao = teachDao;
         this.studentDao = studentDao;
+        this.adminDao = adminDao;
     }
 
     /**
@@ -112,7 +115,7 @@ public class TeacherServiceImpl implements TeacherService {
      * 随机生成试卷
      * */
     @Override
-    public ResponseItem<SubjectItem> generatePaper(String code, String name) {
+    public ResponseItem<SubjectItem> generatePaper(String code, String name, String startTime, String endTime) {
         ResponseItem<SubjectItem> item = new ResponseItem<>();
         // 获取所有选择题
         List<SubjectItem> choiceSubjects = teachDao.choiceSubject();
@@ -163,16 +166,23 @@ public class TeacherServiceImpl implements TeacherService {
                 item.setCode(-2);
                 item.setMsg("已存在同名试卷");
             }else{
-                // 如果查询结果为空则将组卷的结果写入数据库中存储
-                Integer res = teachDao.saveDonePaper(tag, cqOne, cqTwo, cqThree, eqOne, eqTwo, name);
-                if(res > 0){
-                    // 存储成功
-                    item.setCode(0);
-                    item.setMsg("组卷成功，" + tag);
-                    item.setData(list);
-                }else {
-                    item.setCode(-3);
-                    item.setMsg("存储试卷失败");
+                // 如果查询结果为空则设置考试时间并将组卷的结果写入数据库中存储
+                Integer timeResult = adminDao.setExamTime(startTime, endTime, tag);
+                if(timeResult > 0){
+                    // 设置时间成功
+                    Integer res = teachDao.saveDonePaper(tag, cqOne, cqTwo, cqThree, eqOne, eqTwo, name);
+                    if(res > 0){
+                        // 存储成功
+                        item.setCode(0);
+                        item.setMsg("组卷成功，" + tag);
+                        item.setData(list);
+                    }else {
+                        item.setCode(-3);
+                        item.setMsg("存储试卷失败");
+                    }
+                }else{
+                    item.setCode(-4);
+                    item.setMsg("设置时间失败");
                 }
             }
         }else{
@@ -263,6 +273,9 @@ public class TeacherServiceImpl implements TeacherService {
         return item;
     }
 
+    /**
+     * 修改学生成绩
+     * */
     @Override
     public ResponseItem<StudentItem> updateStudentMark(String code, String mark, String tag) {
         ResponseItem<StudentItem> item = new ResponseItem<>();

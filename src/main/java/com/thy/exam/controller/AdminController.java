@@ -37,12 +37,4 @@ public class AdminController {
     public ResponseItem<UserItem> changeInfo(String code, String newPwd){
         return adminService.changeInfo(code, newPwd);
     }
-
-    /**
-     * 设置考试起止时间
-     * */
-    @PostMapping("/set/time")
-    public ResponseItem<TimeItem> setExamTime(String startTime, String endTime, String tag){
-        return adminService.setExamTime(startTime, endTime, tag);
-    }
 }

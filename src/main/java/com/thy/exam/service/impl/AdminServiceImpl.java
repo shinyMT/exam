@@ -70,22 +70,4 @@ public class AdminServiceImpl implements AdminService {
 
         return item;
     }
-
-    /**
-     * 设置考试起止时间
-     * */
-    @Override
-    public ResponseItem<TimeItem> setExamTime(String startTime, String endTime, String tag) {
-        ResponseItem<TimeItem> item = new ResponseItem<>();
-        Integer result = adminDao.setExamTime(startTime, endTime, tag);
-        if(result > 0){
-            item.setCode(0);
-            item.setMsg("设置成功");
-        }else {
-            item.setCode(-1);
-            item.setMsg("设置失败");
-        }
-
-        return item;
-    }
 }
