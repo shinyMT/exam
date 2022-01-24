@@ -133,7 +133,7 @@ public class TeacherServiceImpl implements TeacherService {
         int essayCount = teachDao.getEssayCount();
         if(choiceCount > 0 && essayCount > 0){
             // 随机选择3个选择题2个问答题组成试卷
-            if(choiceCount <=3){
+            if(choiceCount <= 3){
                 for(int i=0; i<choiceCount; i++){
                     list.add(choiceSubjects.get(i));
                 }
@@ -142,7 +142,7 @@ public class TeacherServiceImpl implements TeacherService {
                     list.add(choiceSubjects.get(i));
                 }
             }
-            if(essayCount <=2){
+            if(essayCount <= 2){
                 for(int i=0; i<essayCount; i++){
                     list.add(essaySubjects.get(i));
                 }
@@ -202,7 +202,6 @@ public class TeacherServiceImpl implements TeacherService {
         QAItem qa = studentDao.getPaperTagByName(name);
         if(qa != null){
             String tag = qa.getTag();
-//            System.out.println(tag);
             StudentItem studentPaper = teachDao.getStudentPaper(code, tag);
             if(studentPaper != null){
                 List<StudentItem> list = new ArrayList<>();

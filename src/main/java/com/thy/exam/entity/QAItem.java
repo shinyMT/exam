@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Author: thy
+ * 封装一个试卷条目
  */
 public class QAItem implements Serializable {
     private static final long serialVersionUID = -6156449883811985487L;

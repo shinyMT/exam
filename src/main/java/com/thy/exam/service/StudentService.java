@@ -13,6 +13,8 @@ public interface StudentService {
 
     /**
      * 判断用户是否已经提交过试卷
+     * @param code 用户账号
+     * @param name 试卷名
      * */
     ResponseItem<StudentItem> checkCommitStatus(String code, String name);
 

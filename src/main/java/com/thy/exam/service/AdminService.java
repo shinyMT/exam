@@ -1,7 +1,6 @@
 package com.thy.exam.service;
 
 import com.thy.exam.entity.ResponseItem;
-import com.thy.exam.entity.TimeItem;
 import com.thy.exam.entity.UserItem;
 
 /**
@@ -10,6 +9,8 @@ import com.thy.exam.entity.UserItem;
 public interface AdminService {
     /**
      * 验证登陆信息
+     * @param code 账号
+     * @param password 密码
      * */
     ResponseItem<UserItem> checkIdentity(String code, String password);
 

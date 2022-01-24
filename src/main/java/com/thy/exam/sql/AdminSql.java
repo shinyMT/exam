@@ -6,11 +6,13 @@ import org.apache.ibatis.jdbc.SQL;
  * Author: thy
  */
 public class AdminSql {
+    // 定义要使用的表名
     private static final String USER_TABLE = "user";
     private static final String TIME_TABLE = "time";
 
     /**
      * 验证用户登陆信息
+     * @param code 用户账号
      * */
     public String checkIdentity(String code){
         SQL sql = new SQL();

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Author: thy
- * 封装一个成绩查询的条目
+ * 封装一个成绩查询结果的条目
  */
 public class MarkItem implements Serializable {
     private static final long serialVersionUID = 5673318681805226661L;

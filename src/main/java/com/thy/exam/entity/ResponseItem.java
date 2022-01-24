@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Author: thy
+ * 封装一个返回给前端的响应条目
  */
 public class ResponseItem<T> implements Serializable {
     private static final long serialVersionUID = 8636784335318533156L;

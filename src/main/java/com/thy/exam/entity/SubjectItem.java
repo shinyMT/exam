@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Author: thy
+ * 封装一个试题条目
  */
 public class SubjectItem implements Serializable {
     private static final long serialVersionUID = -2190415716574020140L;

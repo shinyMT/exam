@@ -1,7 +1,6 @@
 package com.thy.exam.controller;
 
 import com.thy.exam.entity.ResponseItem;
-import com.thy.exam.entity.TimeItem;
 import com.thy.exam.entity.UserItem;
 import com.thy.exam.service.AdminService;
 import lombok.NoArgsConstructor;
