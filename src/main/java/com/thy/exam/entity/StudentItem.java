@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Author: thy
+ * 封装一个学生条目
  */
 public class StudentItem implements Serializable {
     private static final long serialVersionUID = 1249295592515467013L;

@@ -2,7 +2,6 @@ package com.thy.exam.service.impl;
 
 import com.thy.exam.dao.AdminDao;
 import com.thy.exam.entity.ResponseItem;
-import com.thy.exam.entity.TimeItem;
 import com.thy.exam.entity.UserItem;
 import com.thy.exam.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;

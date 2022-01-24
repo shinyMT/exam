@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Author: thy
+ * 封装一个用户信息条目
  */
 public class UserItem implements Serializable {
     private static final long serialVersionUID = -2839177392298732418L;

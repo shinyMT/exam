@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Author: thy
+ * 封装一个时间条目
  */
 public class TimeItem implements Serializable {
     private static final long serialVersionUID = -2625023513326278205L;

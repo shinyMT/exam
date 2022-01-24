@@ -39,6 +39,9 @@ public class StudentServiceImpl implements StudentService {
         return item;
     }
 
+    /**
+     * 判断是否提交过试卷
+     * */
     @Override
     public ResponseItem<StudentItem> checkCommitStatus(String code, String name) {
         ResponseItem<StudentItem> item = new ResponseItem<>();
@@ -141,6 +144,9 @@ public class StudentServiceImpl implements StudentService {
         return item;
     }
 
+    /**
+     * 获取考试时间
+     * */
     @Override
     public ResponseItem<TimeItem> getExamTime(String name) {
         ResponseItem<TimeItem> item = new ResponseItem<>();

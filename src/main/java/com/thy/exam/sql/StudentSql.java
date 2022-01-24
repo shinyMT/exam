@@ -19,6 +19,7 @@ public class StudentSql {
 
     /**
      * 获取试卷标识
+     * @param name 试卷名
      * */
     public String getPaperTagByName(String name){
         SQL sql = new SQL();
@@ -88,7 +89,6 @@ public class StudentSql {
         sql.LEFT_OUTER_JOIN(QA_TABLE + " q on s.qaTag=q.tag");
         sql.WHERE("s.code='" + code + "'");
 
-//        System.out.println(sql);
         return sql.toString();
     }
 

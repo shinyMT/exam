@@ -21,7 +21,6 @@ public class TagUtil {
         String second = Integer.toString(calendar.get(Calendar.SECOND));
 
         // 将教师工号和生成的时间拼接作为唯一标识符返回
-//        System.out.println(year + month + day + hour + minute + second);
         return code + "-" + year + month + day + hour + minute + second;
     }
 }
