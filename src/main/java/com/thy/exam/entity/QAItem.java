@@ -13,10 +13,16 @@ public class QAItem implements Serializable {
     private String code;
     // 选择题1题目
     private String cqOne;
+    // 选择题1答案
+    private String cqOneAnswer;
     // 选择题2题目
     private String cqTwo;
+    // 选择题2答案
+    private String cqTwoAnswer;
     // 选择题3题目
     private String cqThree;
+    // 选择题3答案
+    private String cqThreeAnswer;
     // 问答题1题目
     private String eqOne;
     // 问答题2题目
@@ -88,5 +94,29 @@ public class QAItem implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCqOneAnswer() {
+        return cqOneAnswer;
+    }
+
+    public void setCqOneAnswer(String cqOneAnswer) {
+        this.cqOneAnswer = cqOneAnswer;
+    }
+
+    public String getCqTwoAnswer() {
+        return cqTwoAnswer;
+    }
+
+    public void setCqTwoAnswer(String cqTwoAnswer) {
+        this.cqTwoAnswer = cqTwoAnswer;
+    }
+
+    public String getCqThreeAnswer() {
+        return cqThreeAnswer;
+    }
+
+    public void setCqThreeAnswer(String cqThreeAnswer) {
+        this.cqThreeAnswer = cqThreeAnswer;
     }
 }

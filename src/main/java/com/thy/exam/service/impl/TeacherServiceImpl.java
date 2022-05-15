@@ -77,9 +77,9 @@ public class TeacherServiceImpl implements TeacherService {
      * 修改试题
      * */
     @Override
-    public ResponseItem<SubjectItem> updateSubjectById(int id, String title, String choice, String type) {
+    public ResponseItem<SubjectItem> updateSubjectById(int id, String title, String choice, String type, String answer) {
         ResponseItem<SubjectItem> item = new ResponseItem<>();
-        Integer result = teachDao.updateSubjectById(id, title, choice, type);
+        Integer result = teachDao.updateSubjectById(id, title, choice, type, answer);
         if(result > 0){
             // 更新成功
             item.setCode(0);
@@ -156,8 +156,11 @@ public class TeacherServiceImpl implements TeacherService {
             String tag = tagUtil.generateTag(code);
             // 获取组卷得到的题目
             String cqOne = list.get(0).getTitle() + ":" + list.get(0).getChoice();
+            String cqOneAnswer = list.get(0).getAnswer();
             String cqTwo = list.get(1).getTitle() + ":" + list.get(1).getChoice();
+            String cqTwoAnswer = list.get(1).getAnswer();
             String cqThree = list.get(2).getTitle() + ":" + list.get(2).getChoice();
+            String cqThreeAnswer = list.get(2).getAnswer();
             String eqOne = list.get(3).getTitle();
             String eqTwo = list.get(4).getTitle();
             // 存储前判断是否存在同名试卷
@@ -170,7 +173,8 @@ public class TeacherServiceImpl implements TeacherService {
                 Integer timeResult = adminDao.setExamTime(startTime, endTime, tag);
                 if(timeResult > 0){
                     // 设置时间成功
-                    Integer res = teachDao.saveDonePaper(tag, cqOne, cqTwo, cqThree, eqOne, eqTwo, name);
+                    Integer res = teachDao.saveDonePaper(tag, cqOne, cqOneAnswer, cqTwo, cqTwoAnswer, cqThree,
+                            cqThreeAnswer, eqOne, eqTwo, name);
                     if(res > 0){
                         // 存储成功
                         item.setCode(0);
@@ -287,6 +291,23 @@ public class TeacherServiceImpl implements TeacherService {
             item.setCode(-1);
             item.setMsg("修改失败");
         }
+
+        return item;
+    }
+
+    /**
+     * 根据试卷标识符获取试卷信息
+     * */
+    @Override
+    public ResponseItem<QAItem> getAnswerByTag(String tag) {
+        ResponseItem<QAItem> item = new ResponseItem<>();
+        QAItem qa = teachDao.getAnswerByTag(tag);
+        List<QAItem> list = new ArrayList<>();
+        list.add(qa);
+
+        item.setCode(0);
+        item.setMsg("获取成功");
+        item.setData(list);
 
         return item;
     }

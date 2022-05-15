@@ -1,5 +1,6 @@
 package com.thy.exam.controller;
 
+import com.thy.exam.entity.QAItem;
 import com.thy.exam.entity.ResponseItem;
 import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.SubjectItem;
@@ -42,8 +43,8 @@ public class TeacherController {
      * 修改试题
      * */
     @PostMapping("/update/subject")
-    public ResponseItem<SubjectItem> updateSubjectById(int id, String title, String choice, String type){
-        return teacherService.updateSubjectById(id, title, choice, type);
+    public ResponseItem<SubjectItem> updateSubjectById(int id, String title, String choice, String type, String answer){
+        return teacherService.updateSubjectById(id, title, choice, type, answer);
     }
 
     /**
@@ -92,5 +93,13 @@ public class TeacherController {
     @PostMapping("/update/mark")
     public ResponseItem<StudentItem> updateStudentMark(String code, String mark, String tag){
         return teacherService.updateStudentMark(code, mark, tag);
+    }
+
+    /**
+     * 根据试卷标识符获取试卷信息
+     * */
+    @PostMapping("/get/answer")
+    public ResponseItem<QAItem> getAnswerByTag(String tag){
+        return teacherService.getAnswerByTag(tag);
     }
 }

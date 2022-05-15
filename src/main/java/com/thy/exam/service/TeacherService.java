@@ -1,5 +1,6 @@
 package com.thy.exam.service;
 
+import com.thy.exam.entity.QAItem;
 import com.thy.exam.entity.ResponseItem;
 import com.thy.exam.entity.StudentItem;
 import com.thy.exam.entity.SubjectItem;
@@ -28,7 +29,7 @@ public interface TeacherService {
      * @param choice 选项
      * @param type 题目类型
      * */
-    ResponseItem<SubjectItem> updateSubjectById(int id, String title, String choice, String type);
+    ResponseItem<SubjectItem> updateSubjectById(int id, String title, String choice, String type, String answer);
 
     /**
      * 删除试题
@@ -70,4 +71,10 @@ public interface TeacherService {
      * @param tag 试卷标识符
      * */
     ResponseItem<StudentItem> updateStudentMark(String code, String mark, String tag);
+
+    /**
+     * 根据试卷标识符获取试卷信息
+     * @param tag 试卷唯一标识符
+     * */
+    ResponseItem<QAItem> getAnswerByTag(String tag);
 }

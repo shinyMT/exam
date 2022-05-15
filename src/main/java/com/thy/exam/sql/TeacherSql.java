@@ -16,11 +16,13 @@ public class TeacherSql {
      * @param title 题目
      * @param choice 选项
      * @param type 题目类型
+     * @param answer 试题答案
      * */
-    public String addSubject(String title, String choice, String type){
+    public String addSubject(String title, String choice, String type, String answer){
         SQL sql = new SQL();
         sql.INSERT_INTO(SUBJECT_TABLE);
-        sql.VALUES("title, choice, type", "'" + title + "', '" + choice + "', '" + type + "'");
+        sql.VALUES("title, choice, type, answer",
+                "'" + title + "', '" + choice + "', '" + type + "', '" + answer + "'");
 
         return sql.toString();
     }
@@ -73,11 +75,12 @@ public class TeacherSql {
      * @param title 新题目
      * @param choice 新选项
      * @param type 新题目类型
+     * @param answer 题目答案--选择题
      * */
-    public String updateSubjectById(int id, String title, String choice, String type){
+    public String updateSubjectById(int id, String title, String choice, String type, String answer){
         SQL sql = new SQL();
         sql.UPDATE(SUBJECT_TABLE);
-        sql.SET("title='" + title + "', choice='" + choice + "', type='" + type + "'");
+        sql.SET("title='" + title + "', choice='" + choice + "', type='" + type + "', answer='" + answer + "'");
         sql.WHERE("id=" + id);
 
 //        System.out.println(sql);
@@ -107,18 +110,23 @@ public class TeacherSql {
     /**
      * 存储组卷好的试题
      * @param cqOne 选择题1的题目
+     * @param cqOneAnswer 选择题1的答案
      * @param cqTwo 选择题2的题目
+     * @param cqTwoAnswer 选择题2的答案
      * @param cqThree 选择题3的题目
+     * @param cqThreeAnswer  选择题3的答案
      * @param eqOne 问答题1的题目
      * @param eqTwo 问答题2的题目
      * @param tag 试卷标识符
      * */
-    public String saveDonePaper(String tag, String cqOne, String cqTwo, String cqThree,
+    public String saveDonePaper(String tag, String cqOne, String cqOneAnswer, String cqTwo, String cqTwoAnswer,
+                                String cqThree, String cqThreeAnswer,
                                String eqOne, String eqTwo, String name){
         SQL sql = new SQL();
         sql.INSERT_INTO(QA_TABLE);
-        sql.VALUES("tag, cqOne, cqTwo, cqThree, eqOne, eqTwo, name", "'" + tag + "', '" + cqOne + "', '"
-        + cqTwo + "', '" + cqThree + "', '" + eqOne + "', '" + eqTwo + "', '" + name + "'");
+        sql.VALUES("tag, cqOne,cqOneAnswer, cqTwo, cqTwoAnswer, cqThree, cqThreeAnswer, eqOne, eqTwo, name", "'" +
+                tag + "', '" + cqOne + "', '" + cqOneAnswer + "', '" + cqTwo + "', '" + cqTwoAnswer + "', '" +
+                cqThree + "', '" + cqThreeAnswer + "', '" + eqOne + "', '" + eqTwo + "', '" + name + "'");
 //        System.out.println(sql);
         return sql.toString();
     }
@@ -164,6 +172,19 @@ public class TeacherSql {
         SQL sql = new SQL();
         sql.UPDATE(STUDENT_TABLE);
         sql.SET("mark='" + mark + "' where code='" + code + "' and qaTag='" + tag + "'");
+
+        return sql.toString();
+    }
+
+    /**
+     * 根据试卷ID获取试卷答案
+     * @param tag 试卷标识符
+     * */
+    public String getAnswerByTag(String tag){
+        SQL sql = new SQL();
+        sql.SELECT("*");
+        sql.FROM(QA_TABLE);
+        sql.WHERE("tag='" + tag + "'");
 
         return sql.toString();
     }

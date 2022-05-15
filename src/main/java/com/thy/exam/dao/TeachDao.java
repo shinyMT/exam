@@ -59,7 +59,7 @@ public interface TeachDao {
      * 修改试题
      * */
     @UpdateProvider(type = TeacherSql.class, method = "updateSubjectById")
-    Integer updateSubjectById(int id, String title, String choice, String type);
+    Integer updateSubjectById(int id, String title, String choice, String type, String answer);
 
     /**
      * 删除试题
@@ -77,7 +77,8 @@ public interface TeachDao {
      * 存储组卷完成的试卷信息
      * */
     @InsertProvider(type = TeacherSql.class, method = "saveDonePaper")
-    Integer saveDonePaper(String tag, String cqOne, String cqTwo, String cqThree,
+    Integer saveDonePaper(String tag, String cqOne, String cqOneAnswer, String cqTwo, String cqTwoAnswer,
+                          String cqThree, String cqThreeAnswer,
                           String eqOne, String eqTwo, String name);
 
     /**
@@ -103,4 +104,10 @@ public interface TeachDao {
      * */
     @UpdateProvider(type = TeacherSql.class, method = "updateStudentMark")
     Integer updateStudentMark(String code, String mark, String tag);
+
+    /**
+     * 根据试卷标识符获取试卷信息
+     * */
+    @SelectProvider(type = TeacherSql.class, method = "getAnswerByTag")
+    QAItem getAnswerByTag(String tag);
 }

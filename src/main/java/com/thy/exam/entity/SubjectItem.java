@@ -17,6 +17,8 @@ public class SubjectItem implements Serializable {
     private String choice;
     // 试题类型
     private String type;
+    // 试题答案--仅限选择题等主观题目
+    private String answer;
 
     public int getId() {
         return id;
@@ -48,5 +50,13 @@ public class SubjectItem implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }
