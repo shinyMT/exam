@@ -27,8 +27,8 @@ public class TeacherController {
      * 添加试题
      * */
     @PostMapping("/add/subject")
-    public ResponseItem<SubjectItem> addSubject(String title, String choice, String type){
-        return teacherService.addSubject(title, choice, type);
+    public ResponseItem<SubjectItem> addSubject(String title, String choice, String type, String answer){
+        return teacherService.addSubject(title, choice, type, answer);
     }
 
     /**

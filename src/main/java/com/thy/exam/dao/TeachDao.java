@@ -17,7 +17,7 @@ public interface TeachDao {
      * 添加试题
      * */
     @InsertProvider(type = TeacherSql.class, method = "addSubject")
-    Integer addSubject(String title, String choice, String type);
+    Integer addSubject(String title, String choice, String type, String answer);
 
     /**
      * 查看当前题库的所有试题

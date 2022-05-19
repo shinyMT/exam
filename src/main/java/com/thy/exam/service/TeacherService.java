@@ -14,8 +14,9 @@ public interface TeacherService {
      * @param title 题目
      * @param choice 选项
      * @param type 题目类型
+     * @param answer 答案
      * */
-    ResponseItem<SubjectItem> addSubject(String title, String choice, String type);
+    ResponseItem<SubjectItem> addSubject(String title, String choice, String type, String answer);
 
     /**
      * 查看当前题库的所有试题

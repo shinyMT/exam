@@ -35,9 +35,9 @@ public class TeacherServiceImpl implements TeacherService {
      * 添加试题
      * */
     @Override
-    public ResponseItem<SubjectItem> addSubject(String title, String choice, String type) {
+    public ResponseItem<SubjectItem> addSubject(String title, String choice, String type, String answer) {
         ResponseItem<SubjectItem> item = new ResponseItem<>();
-        Integer result = teachDao.addSubject(title, choice, type);
+        Integer result = teachDao.addSubject(title, choice, type, answer);
         if(result > 0){
             // 添加成功
             item.setCode(0);
